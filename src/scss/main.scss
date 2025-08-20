@@ -1,6 +1,142 @@
 @import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+$break-points: (
+    "tablet": 768px,
+    "desktop": 1024px
+);
+
+@mixin respond-to($size) {
+    $break-points: map-get($break-points, $size);
+    @media (min-width: $break-points) {
+        @content;
+    }
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
 
 body {
-    background-color: aqua;
-    
+    margin: 0;
+    padding: 0;
+    font-family: $font-primary;
+    background-color: $color-cream;
+    color: $color-grey;
+    font-size: 14px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    background-color: $color-white;
+    max-width: 350px;
+    height: auto;
+    margin: 30px 0;
+    border-radius: 0.42rem;
+    overflow: hidden;
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__content {
+        padding: 25px 30px;
+    }
+
+    @include respond-to("tablet") {
+        flex-direction: row;
+        max-width: 550px;
+        margin: 90px 0;
+
+        &__picture,
+        &__content {
+            width: 50%;
+        }
+    }
+
+    @include respond-to("desktop") {
+        margin: 150px 0;
+    }
+}
+
+.header {
+    &__span {
+        font-family: $font-secondary;
+        font-size: 0.7rem;
+        letter-spacing: 0.2125rem;
+    }
+
+    &__h2 {
+        font-size: 1.8rem;
+        color: $color-black;
+        margin: 17px 0;
+    }
+}
+
+.main {
+    &__p {
+        line-height: 1.6;
+    }
+
+    &__prices {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 18px;
+    }
+
+    &__priceDes {
+        color: $color-green-500;
+        font-size: 1.7rem;
+        font-weight: 800;
+    }
+
+    &__priceOri {
+        font-family: $font-secondary;
+        text-decoration: line-through ;
+    }
+}
+
+%button-style {
+    padding: 15px 0;
+    text-decoration: none;
+    color: $color-white;
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: 0.82rem;
+    border-radius: 0.6rem;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.footer {
+    margin-top: 20px;
+    .a {
+        @extend %button-style;
+        width: 100%;
+        height: auto;
+        background-color: $color-green-500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        &__svg {
+            width: 15px;
+            height: 16px;
+        }
+
+        &:hover {
+            background-color: $color-green-700;
+        }
+    }
 }
